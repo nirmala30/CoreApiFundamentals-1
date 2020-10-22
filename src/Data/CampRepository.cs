@@ -60,6 +60,25 @@ namespace CoreCodeCamp.Data
       return await query.ToArrayAsync();
     }
 
+    public async Task<Camp> GetCampByMonikerAsync(string moniker, bool includeTalks = false)
+    {
+       _logger.LogInformation($"Getting camp by moniker");
+
+        IQueryable<Camp> query = _context.Camps
+            .Include(c => c.Location);
+
+            if (includeTalks)
+            {
+                query = query
+                  .Include(c => c.Talks)
+                  .ThenInclude(t => t.Speaker);
+            }
+
+            query = query.Where(c => c.Moniker == moniker);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
     public async Task<Camp[]> GetAllCampsAsync(bool includeTalks = false)
     {
       _logger.LogInformation($"Getting all Camps");

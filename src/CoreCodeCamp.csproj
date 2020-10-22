@@ -6,11 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\CampsController - Copy.cs" />
     <Compile Remove="Models\LocationModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Tests\" />
     <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="CoreCodeCamp.sln" />
   </ItemGroup>
 
   <ItemGroup>
